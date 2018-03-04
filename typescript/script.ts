@@ -3,51 +3,25 @@ var canvas = <HTMLCanvasElement> document.getElementById("asteroids");
 // Get context
 var context = canvas.getContext("2d");
 
-// Set styles
-context.strokeStyle = 'lightgrey';
-context.fillStyle = 'dimgrey';
-context.lineWidth = 5;
 
-// Position
-context.rect(75, 50, canvas.width - 150, canvas.height - 100);
+// Grid
+context.strokeStyle = "#00FF00";
+context.fillStyle = "#009900";
 
-// Apply styles
-context.stroke();
-context.fill();
+for(var x = 0; x < canvas.width; x += 10) {
+ context.beginPath();
+ context.moveTo(x, 0);
+ context.lineTo(x, canvas.height);
+ context.lineWidth = (x % 50 == 0) ? 0.5 : 0.25;
+ context.stroke();
+ if(x % 50 == 0 ) {context.fillText("'"+x+"'", x, 10);}
+}
 
-// Text
-context.font = "34px Arial";
-context.strokeStyle = '#FF2222';
-context.fillStyle = '#FFAAAA';
-context.lineWidth = 0.75;
-context.textAlign="center";
-
-// Draw text top
-let msg = "2D Drawing";
-context.fillText(msg, canvas.width / 2, 100);
-context.strokeText(msg, canvas.width / 2, 100);
-
-// Draw text bottom
-let msg2 = "its quite easy";
-context.font = "24px Arial";
-context.fillText(msg2, canvas.width / 2, 330);
-context.strokeText(msg2, canvas.width / 2, 330);
-
-// Draw stickfigure
-context.strokeStyle = '#FFFFFF';
-context.lineWidth = 2;
-context.beginPath();
-context.arc(200, 140, 20, 0, Math.PI * 2);
-context.moveTo(200, 160);
-context.lineTo(200, 220);
-context.moveTo(180, 300);
-context.lineTo(185, 260);
-context.lineTo(200, 220);
-context.lineTo(215, 260);
-context.lineTo(220, 300);
-context.moveTo(240, 130);
-context.lineTo(225, 170);
-context.lineTo(200, 170);
-context.lineTo(175, 180);
-context.lineTo(170, 220);
-context.stroke();
+for(var y = 0; y < canvas.height; y += 10) {
+ context.beginPath();
+ context.moveTo(0, y);
+ context.lineTo(canvas.width, y);
+ context.lineWidth = (y % 50 == 0) ? 0.5 : 0.25;
+ context.stroke();
+ if(y % 50 == 0 ) {context.fillText("'"+y+"'", 0, y + 10);}
+}
