@@ -1,7 +1,10 @@
 // Get canvas element
-var canvas = <HTMLCanvasElement> document.getElementById("asteroids");
+var canvas = < HTMLCanvasElement > document.getElementById("asteroids");
 // Get context
 var context = canvas.getContext("2d");
 
-drawGrid(context);
+draw_grid(context, 10, 50, '#00FF00', '#009900');
+draw_ship(context, 200, 200, 150, {
+    guide: true
+});
 

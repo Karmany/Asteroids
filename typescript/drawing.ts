@@ -1,4 +1,5 @@
-function drawGrid(ctx, minor, major, stroke, fill) {
+//draw_grid(context, 10, 50, '#00FF00', '#009900');
+function draw_grid(ctx, minor, major, stroke, fill) {
     minor = minor || 10;
     major = major || minor * 5;
     stroke = stroke || "#00FF00";
@@ -29,4 +30,64 @@ function drawGrid(ctx, minor, major, stroke, fill) {
         }
     }
     ctx.restore();
+}
+
+// draw_pacman(context, 200, 200, 150, Math.random());
+function draw_pacman(context, x, y, rad, open) {
+    context.beginPath();
+    context.arc(x, y, rad, open * Math.PI, 1.8 * Math.PI);
+    context.lineTo(200, 200);
+    context.fillStyle = "yellow";
+    context.fill();
+    context.closePath();
+    context.strokeStyle = '#000000';
+    context.lineWidth = 2;
+    context.stroke();
+
+
+}
+
+function draw_ship(ctx, x, y, radius, options) {
+    options = options || {};
+    ctx.save();
+    // optionally draw a guide showing the collision radius
+    if (options.guide) {
+        ctx.strokeStyle = "white";
+        ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fill();
+    }
+    // set some default values
+    ctx.lineWidth = options.lineWidth || 2;
+    ctx.strokeStyle = options.stroke || "white";
+    ctx.fillStyle = options.fill || "black";
+    let angle = (options.angle || 0.5 * Math.PI) / 2;
+    // draw the ship in three lines
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(
+        x + Math.cos(Math.PI - angle) * radius,
+        y + Math.sin(Math.PI - angle) * radius
+    );
+    ctx.lineTo(
+        x + Math.cos(Math.PI + angle) * radius,
+        y + Math.sin(Math.PI + angle) * radius
+    );
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+    /*
+    // Example options
+    draw_ship(context, 200, 200, 125, {
+        guide: true,
+        stroke: 'gold',
+        fill: 'purple',
+        angle: 0.2 * Math.PI,
+        lineWidth: 8
+    });
+    */
 }
